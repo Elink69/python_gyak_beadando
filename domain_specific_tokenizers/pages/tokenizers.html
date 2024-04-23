@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/pages.css">
+    <title>Tokenizálók</title>
+</head>
+<body>
+    <h1>Tokenizálók eredményei</h1>
+    
+    <h2>1. Szótárak méretei</h2>
+
+    <p>A domének különböző méretei és a WordPiece tokenizáló algoritmus működése miatt 
+        minden doménhez különböző méretű szótár jött létre. Minél kisebb volt a tokenizáló 
+        tanító adathalmaza annál kisebb méretű szótárat tudott összeállítani. 
+        Ahogy az ábrán látható a nagyobb adathalmazokon a szótárméret elérte 
+        az általános BERT modell szótárának a méretét, de sok ennél jelentősen kisebb méretű volt.</p>
+
+    <img src="imgs/vocab sizes.png" alt="tokenizálók szótármérete">
+
+    <p>A 26 darab szótár közül a legkisebb a Tools & Hardware doménhez tartozó szótár volt,
+        ami csak 2324 tokenből állt. A szótárak token számainak átlaga 20323 volt,
+        mediánja pedig 22564, ahogy a táblázatban is látható</p>
+    <p>A szótárak összehasonlításában egyik érdekes eredmény a leghosszabb tokeneknél volt megfigyelhető.
+        Több domén esetében is sokszor megismételt írásjelek, mint például sok egymást követő felkiáltójel
+        volt a leghosszabb token.</p>
+    <table>
+        <tr>
+            <th>Megnevezés</th>
+            <th>Érték</th>
+        </tr>
+        <tr>
+            <td>Szótárak száma</td>
+            <td>26</td>
+        </tr>
+        <tr>
+            <td>Tokenek számának átlaga</td>
+            <td>20323</td>
+        </tr>
+        <tr>
+            <td>Tokenek számának mediánja</td>
+            <td>22564</td>
+        </tr>
+        <tr>
+            <td>Legkisebb szótár mérete</td>
+            <td>2324</td>
+        </tr>
+        <tr>
+            <td>Legnagyobb szótár mérete</td>
+            <td>30522</td>
+        </tr>
+        <tr>
+            <td>Token szám - adtlahmaz méret korrelációja</td>
+            <td>0.5369</td>
+        </tr>
+    </table>
+
+    <h2>2. Szótárak hasonlósága</h2>
+
+    <p>Fontosnak tartottam a különböző szótárak hasonlóságának a vizsgálatát is.
+        Ehhez egy hasonlósági mátrixot hoztam létre, amiben szerepel az
+        összes domén pár szótárának összehasonlítása.</p>
+    
+    <img src="imgs/similarity matrix.png" alt="hasonlósági mátrix">
+
+    <p>Legkevésbé az általános BERT és az eszközökről és gépekről szóló szövegen tanított szótárak egyeznek.
+        Ez érthető, mert a BERT előtanítására használt saját kiadású könyvekben és a wikipedia-n
+        valószínűleg sokkal kevesebbet szerepeltek gépekről és eszközökről szóló szövegek,
+        illetve a Tools & Hardware volt az egyik legkisebb feldolgozott adathalmaz,
+        ezáltal a legkisebb szótárral rendelkező is. A legnagyobb hasonlósággal rendelkező domén pár
+        sem meglepő, mivel a <i>DVD</i> és <i>Video</i> termék értékelések témájában nincs különbség,
+        mindkét esetben filmekről írtak véleményt a nézők. A két kategóriát az a tulajdonság különbözteti meg,
+        hogy a <i>DVD</i> kategóriába lemezeken megvásárolt filmek tartoznak,
+        míg a <i>Video</i> kategóriába az online megnézhető filmek.</p>
+    
+    <p>A hasonlósági mátrixról a 2. táblázatban láthatók összefoglaló adatok. 
+        Itt láthatók, a szélsőséges esetek pontosabb hasonlósági értékei, illetve, hogy bármely
+        két domén szótára átlagosan 29%-ban egyezett</p>
+
+    <table>
+        <tr>
+            <th>
+                Megnevezés
+            </th>
+            <th>
+                Érték
+            </th>
+            <th>
+                Domén pár
+            </th>
+        </tr>
+        <tr>
+            <td>
+                Átlagos hasonlóság
+            </td>
+            <td>
+                0.2901
+            </td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>
+                Medián hasonlóság
+            </td>
+            <td>
+                02677
+            </td>
+            <td>
+                -
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Legkisebb hasonlóság
+            </td>
+            <td>
+                0.0569
+            </td>
+            <td>
+                Tools & Hardware - Általános BERT
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Legnagyobb hasonlóság
+            </td>
+            <td>
+                0.7000
+            </td>
+            <td>
+                DVD - Video
+            </td>
+        </tr>
+    </table>
+
+    <p>Külön kiemeltem az általános BERT szótárához mért hasonlóságokat, ezek a hasonlóságok
+        csökkenő sorrendben láthatók a 9. ábrán. Ezeket az értékeket valóban befolyásolták az
+        adathalmazok mérete, a hasonlóság és adathalmaz méret között 0.54-es Pearson korreláció van.</p>
+
+    <img src="imgs/bert similartiy.png" alt="bert hasonlóság">
+</body>
+</html>

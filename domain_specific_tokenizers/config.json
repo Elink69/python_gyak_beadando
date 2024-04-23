@@ -1,0 +1,41 @@
+{
+    "HuggingFaceToken": "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",
+
+    "id2label" : {
+        "0" : "Negative",
+        "1" : "Positive"
+    },
+
+    "label2id": {
+        "Negative" : 0,
+        "Positive" : 1
+    },
+    
+    "TokenizerOptions": [
+        "Apparel",
+        "Automotive",
+        "Baby",
+        "Beauty",
+        "Books",
+        "Camera & Photo",
+        "Cell Phones & Service",
+        "Computer & Video Games",
+        "DVD",
+        "Electronics",
+        "Gourmet Food",
+        "Grocery",
+        "Health & Personal Care",
+        "Jewelry & Watches",
+        "Kitchen & Housewares",
+        "Magazines",
+        "Music",
+        "Musical Instruments",
+        "Office Products",
+        "Outdoor Living",
+        "Software",
+        "Sports & Outdoors",
+        "Tools & Hardware",
+        "Toys & Games",
+        "Video"
+    ]
+}
